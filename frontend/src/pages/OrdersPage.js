@@ -23,19 +23,26 @@ function OrdersPage({ token }) {
   }, []);
 
   const fetchOrders = async () => {
-    try {
-      const res  = await fetch("/api/orders/mine", {
+  try {
+    const res = await fetch(
+      `https://e-commerce-web-l75s.onrender.com/api/orders/mine`,
+      {
         headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-      setOrders(data);
-    } catch (err) {
-      setError("Could not load your orders. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+      }
+    );
+
+    const text = await res.text();
+    const data = text ? JSON.parse(text) : {};
+
+    if (!res.ok) throw new Error(data.message);
+
+    setOrders(data);
+  } catch (err) {
+    setError("Could not load your orders. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (loading) return <div className="page-container"><p className="status-text">Loading your orders...</p></div>;
   if (error)   return <div className="page-container"><p className="error-text">⚠️ {error}</p></div>;

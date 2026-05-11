@@ -26,7 +26,7 @@ function HomePage({ onViewProduct, onAddToCart }) {
     setLoading(true);
     setError("");
     try {
-      const res  = await fetch("/api/products");
+      const res  = await fetch("https://e-commerce-web-l75s.onrender.com/api/products");
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       setProducts(data);

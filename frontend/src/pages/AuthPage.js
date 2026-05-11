@@ -25,7 +25,7 @@ function AuthPage({ onLogin }) {
       : { email, password };
 
     try {
-      const res  = await fetch(`/api/auth/${tab}`, {
+      const res  = await fetch(`https://e-commerce-web-l75s.onrender.com/api/auth/${tab}`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(body),
